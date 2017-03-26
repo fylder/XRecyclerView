@@ -21,11 +21,12 @@ public class EmptyViewActivity extends AppCompatActivity {
     private MyAdapter mAdapter;
     private ArrayList<String> listData;
     private View mEmptyView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emptyview);
-        mRecyclerView = (XRecyclerView)this.findViewById(R.id.recyclerview);
+        mRecyclerView = (XRecyclerView) this.findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -35,7 +36,7 @@ public class EmptyViewActivity extends AppCompatActivity {
         mRecyclerView.setEmptyView(mEmptyView);
 
         //没有数据，触发emptyView
-        listData = new  ArrayList<String>();
+        listData = new ArrayList<String>();
         mAdapter = new MyAdapter(listData);
 
         mRecyclerView.setAdapter(mAdapter);

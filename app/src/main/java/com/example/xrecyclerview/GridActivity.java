@@ -31,8 +31,8 @@ public class GridActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mRecyclerView = (XRecyclerView)this.findViewById(R.id.recyclerview);
-        GridLayoutManager layoutManager = new GridLayoutManager(this,3);
+        mRecyclerView = (XRecyclerView) this.findViewById(R.id.recyclerview);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         mRecyclerView.setLayoutManager(layoutManager);
 
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
@@ -42,13 +42,13 @@ public class GridActivity extends AppCompatActivity {
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                refreshTime ++;
+                refreshTime++;
                 times = 0;
-                new Handler().postDelayed(new Runnable(){
+                new Handler().postDelayed(new Runnable() {
                     public void run() {
 
                         listData.clear();
-                        for(int i = 0; i < 20 ;i++){
+                        for (int i = 0; i < 20; i++) {
                             listData.add("item" + i + "after " + refreshTime + " times of refresh");
                         }
                         mAdapter.notifyDataSetChanged();
@@ -60,12 +60,12 @@ public class GridActivity extends AppCompatActivity {
 
             @Override
             public void onLoadMore() {
-                if(times < 2){
-                    new Handler().postDelayed(new Runnable(){
+                if (times < 2) {
+                    new Handler().postDelayed(new Runnable() {
                         public void run() {
                             mRecyclerView.loadMoreComplete();
-                            for(int i = 0; i < 20 ;i++){
-                                listData.add("item" + (i + listData.size()) );
+                            for (int i = 0; i < 20; i++) {
+                                listData.add("item" + (i + listData.size()));
                             }
                             mRecyclerView.loadMoreComplete();
                             mAdapter.notifyDataSetChanged();
@@ -74,20 +74,20 @@ public class GridActivity extends AppCompatActivity {
                 } else {
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
-                            for(int i = 0; i < 9 ;i++){
-                                listData.add("item" + (i + listData.size()) );
+                            for (int i = 0; i < 9; i++) {
+                                listData.add("item" + (i + listData.size()));
                             }
                             mAdapter.notifyDataSetChanged();
                             mRecyclerView.setNoMore(true);
                         }
                     }, 1000);
                 }
-                times ++;
+                times++;
             }
         });
 
-        listData = new  ArrayList<String>();
-        for(int i = 0; i < 20 ;i++){
+        listData = new ArrayList<String>();
+        for (int i = 0; i < 20; i++) {
             listData.add("item" + i);
         }
         mAdapter = new MyAdapter(listData);

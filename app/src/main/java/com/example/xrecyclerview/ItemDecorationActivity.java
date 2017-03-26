@@ -24,6 +24,7 @@ public class ItemDecorationActivity extends AppCompatActivity {
     private ArrayList<String> listData;
     private int refreshTime = 0;
     private int times = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +33,7 @@ public class ItemDecorationActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mRecyclerView = (XRecyclerView)this.findViewById(R.id.recyclerview);
+        mRecyclerView = (XRecyclerView) this.findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
@@ -44,19 +45,19 @@ public class ItemDecorationActivity extends AppCompatActivity {
         mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
         mRecyclerView.setArrowImageView(R.drawable.iconfont_downgrey);
 
-        View header = LayoutInflater.from(this).inflate(R.layout.recyclerview_header, (ViewGroup)findViewById(android.R.id.content),false);
+        View header = LayoutInflater.from(this).inflate(R.layout.recyclerview_header, (ViewGroup) findViewById(android.R.id.content), false);
         mRecyclerView.addHeaderView(header);
 
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                refreshTime ++;
+                refreshTime++;
                 times = 0;
-                new Handler().postDelayed(new Runnable(){
+                new Handler().postDelayed(new Runnable() {
                     public void run() {
 
                         listData.clear();
-                        for(int i = 0; i < 15 ;i++){
+                        for (int i = 0; i < 15; i++) {
                             listData.add("item" + i + "after " + refreshTime + " times of refresh");
                         }
                         mAdapter.notifyDataSetChanged();
@@ -68,11 +69,11 @@ public class ItemDecorationActivity extends AppCompatActivity {
 
             @Override
             public void onLoadMore() {
-                if(times < 2){
-                    new Handler().postDelayed(new Runnable(){
+                if (times < 2) {
+                    new Handler().postDelayed(new Runnable() {
                         public void run() {
-                            for(int i = 0; i < 15 ;i++){
-                                listData.add("item" + (1 + listData.size() ) );
+                            for (int i = 0; i < 15; i++) {
+                                listData.add("item" + (1 + listData.size()));
                             }
                             mRecyclerView.loadMoreComplete();
                             mAdapter.notifyDataSetChanged();
@@ -81,20 +82,20 @@ public class ItemDecorationActivity extends AppCompatActivity {
                 } else {
                     new Handler().postDelayed(new Runnable() {
                         public void run() {
-                            for(int i = 0; i < 9 ;i++){
-                                listData.add("item" + (1 + listData.size() ) );
+                            for (int i = 0; i < 9; i++) {
+                                listData.add("item" + (1 + listData.size()));
                             }
                             mRecyclerView.setNoMore(true);
                             mAdapter.notifyDataSetChanged();
                         }
                     }, 1000);
                 }
-                times ++;
+                times++;
             }
         });
 
-        listData = new  ArrayList<String>();
-        for(int i = 0; i < 15 ;i++){
+        listData = new ArrayList<String>();
+        for (int i = 0; i < 15; i++) {
             listData.add("item" + i);
         }
         mAdapter = new MyAdapter(listData);

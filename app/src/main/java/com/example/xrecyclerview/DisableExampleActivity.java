@@ -20,6 +20,7 @@ public class DisableExampleActivity extends AppCompatActivity {
     private XRecyclerView mRecyclerView;
     private MyAdapter mAdapter;
     private ArrayList<String> listData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +29,14 @@ public class DisableExampleActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mRecyclerView = (XRecyclerView)this.findViewById(R.id.recyclerview);
+        mRecyclerView = (XRecyclerView) this.findViewById(R.id.recyclerview);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setLoadingMoreEnabled(false);
         mRecyclerView.setPullRefreshEnabled(false);
-        listData = new  ArrayList<String>();
-        for(int i = 0; i < 15 ;i++){
+        listData = new ArrayList<String>();
+        for (int i = 0; i < 15; i++) {
             listData.add("item" + i);
         }
         mAdapter = new MyAdapter(listData);
